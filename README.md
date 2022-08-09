@@ -1,5 +1,5 @@
 # Introduction 
-For our build we will create a Azure vm, install Docker, and run a Docker container for a website that we have created. 
+In this build we will be utilizing AWS to run our Python Flask application.  
 
 # Getting Started
 The following will help you get started with this build:
