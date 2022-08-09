@@ -3,7 +3,7 @@ For our build we will create a Azure vm, install Docker, and run a Docker contai
 
 # Getting Started
 The following will help you get started with this build:
-1. Have either a [Azure free account](https://azure.microsoft.com/en-in/free/) OR A Cloud Guru account.
-2. Have either the [Azure CLI](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli-windows?tabs=azure-cli) installed on your computer OR use the [Azure Cloud Shell](https://docs.microsoft.com/en-us/azure/cloud-shell/quickstart).
+1. Have either a [AWS free account](https://aws.amazon.com/free/free-tier/) OR A Cloud Guru account.
+2. Have either the [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html) installed on your computer OR use the [AWS Cloud Shell](https://aws.amazon.com/cloudshell/).
 
 # Build and Test
