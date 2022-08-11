@@ -1,5 +1,5 @@
 # Introduction 
-In this build we will be utilizing AWS to run our Python Flask application.  
+In this build we will be utilizing AWS to run a WordPress application. You could use this as a website and/or blog.  
 
 # Getting Started
 The following will help you get started with this build:
