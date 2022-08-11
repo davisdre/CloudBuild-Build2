@@ -6,11 +6,17 @@ $myBuild2KeyPair.KeyMaterial | Out-File -Encoding ascii myBuild2KeyPair.pem
 
 # Create a VPC
 # https://docs.aws.amazon.com/powershell/latest/reference/index.html?page=New-EC2Vpc.html&tocid=New-EC2Vpc
-New-EC2Vpc -CidrBlock 10.0.0.0/16
+$tagEC2Vpc1 = New-Object Amazon.EC2.Model.Tag; $tagEC2Vpc1.Key = "Application-Name"; $tagEC2Vpc1.Value = "myBuild2"
+$tagEC2Vpc2 = New-Object Amazon.EC2.Model.Tag; $tagEC2Vpc2.Key = "Resource-Owner"; $tagEC2Vpc2.Value = "davisdre@hotmail.com"
+$tagSpecEC2Vpc = New-Object Amazon.EC2.Model.TagSpecification; $tagSpecEC2Vpc.ResourceType = "vpc"; $tagSpecEC2Vpc.Tags.Add($tagEC2Vpc1); $tagSpecEC2Vpc.Tags.Add($tagEC2Vpc2)
+New-EC2Vpc -CidrBlock 10.0.0.0/16 -TagSpecification $tagSpec
 
 # Create a subnet
-# https://docs.aws.amazon.com/powershell/latest/reference/index.html?page=New-EC2Vpc.html&tocid=New-EC2Vpc
-New-EC2Subnet -VpcId vpc-0aa729b5b433170be -CidrBlock 10.0.0.0/24
+# https://docs.aws.amazon.com/powershell/latest/reference/index.html?page=New-EC2Subnet.html&tocid=New-EC2Subnet
+$tagEC2Subnet1 = New-Object Amazon.EC2.Model.Tag; $tagEC2Subnet1.Key = "Application-Name"; $tagEC2Subnet1.Value = "myBuild2"
+$tagEC2Subnet2 = New-Object Amazon.EC2.Model.Tag; $tagEC2Subnet2.Key = "Resource-Owner"; $tagEC2Subnet2.Value = "davisdre@hotmail.com"
+$tagSpecEC2Subnet = New-Object Amazon.EC2.Model.TagSpecification; $tagSpecEC2Subnet.ResourceType = "subnet"; $tagSpecEC2Subnet.Tags.Add($tagEC2Subnet1); $tagSpecEC2Subnet.Tags.Add($tagEC2Subnet2)
+New-EC2Subnet -VpcId vpc-05b72a92d78ea44c4 -CidrBlock 10.0.0.0/24 -TagSpecification $tagSpecEC2Subnet
 
 # Create a internet gateway
 # https://docs.aws.amazon.com/powershell/latest/reference/index.html?page=New-EC2Vpc.html&tocid=New-EC2Vpc
