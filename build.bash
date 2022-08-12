@@ -96,5 +96,3 @@ aws ec2 describe-instances \
 # https://awscli.amazonaws.com/v2/documentation/api/latest/reference/ec2/describe-instance-status.html#examples
 aws ec2 describe-instance-status \
 --instance-id i-09216cc090c66f4e2
-
-# Lets use the portal to create a AWS CloudShell to SSH into box.
