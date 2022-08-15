@@ -18,7 +18,7 @@ Lets setup our AWS Cloud Shell or open a terminal if have AWS Powershell install
 
 ## Step 3
 Lets setup our app environment. We will be creating a key pair, VPC, subnet, internet gateway, route table, security group, and our EC2 instance.
-Here you have two options, you can build via [AWS CLI](build.bash) or [AWS PowerShell](build2.ps1). For this demostration I will walk you through using AWS PowerShell.
+Here you have two options, you can build via [AWS CLI](/build.bash) or [AWS PowerShell](/build2.ps1). For this demostration I will walk you through using AWS PowerShell.
 
 ## Step 4
 If everything was setup correctly, we should be able to SSH into our ec2 so we can setup/install our web app on the ec2. NOTE, depening on how you setup you SSH key, you need to correct some of its permissions, ie. disable inheritance, make sure you are owner and have full control to the .pem you created. 
