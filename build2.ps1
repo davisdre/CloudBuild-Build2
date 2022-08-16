@@ -1,8 +1,8 @@
 # Create key pair and store in a variable
 # https://docs.aws.amazon.com/powershell/latest/userguide/pstools-ec2-keypairs.html
-#$tagEC2KeyPair1 = New-Object Amazon.EC2.Model.Tag; $tagEC2KeyPair1.Key = "Application-Name"; $tagEC2KeyPair1.Value = "myBuild2"
-#$tagEC2KeyPair2 = New-Object Amazon.EC2.Model.Tag; $tagEC2KeyPair2.Key = "Resource-Owner"; $tagEC2KeyPair2.Value = "davisdre@hotmail.com"
-#$tagSpecEC2KeyPair = New-Object Amazon.EC2.Model.TagSpecification; $tagSpecEC2KeyPair.ResourceType = "keypair"; $tagSpecEC2KeyPair.Tags.Add($tagEC2KeyPair1); $tagSpecEC2KeyPair.Tags.Add($tagEC2KeyPair2)
+$tagEC2KeyPair1 = New-Object Amazon.EC2.Model.Tag; $tagEC2KeyPair1.Key = "Application-Name"; $tagEC2KeyPair1.Value = "myBuild2"
+$tagEC2KeyPair2 = New-Object Amazon.EC2.Model.Tag; $tagEC2KeyPair2.Key = "Resource-Owner"; $tagEC2KeyPair2.Value = "davisdre@hotmail.com"
+$tagSpecEC2KeyPair = New-Object Amazon.EC2.Model.TagSpecification; $tagSpecEC2KeyPair.ResourceType = "key-pair"; $tagSpecEC2KeyPair.Tags.Add($tagEC2KeyPair1); $tagSpecEC2KeyPair.Tags.Add($tagEC2KeyPair2)
 $myBuild2KeyPair = New-EC2KeyPair -KeyName myBuild2KeyPair
 # Store the private key to a file
 $myBuild2KeyPair.KeyMaterial | Out-File -Encoding ascii myBuild2KeyPair.pem
