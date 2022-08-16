@@ -4,21 +4,32 @@ In this build we will be utilizing AWS to run a WordPress application. You could
 # Getting Started
 The following will help you get started with this build:
 1. Have either a [AWS free account](https://aws.amazon.com/free/free-tier/) OR A Cloud Guru account.
-2. Have either the [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html) installed on your computer OR use the [AWS Cloud Shell](https://aws.amazon.com/cloudshell/).
-3. Preferred for you to have either AWS CLI or AWS PowerShell installed on your computer.
-4. Preferred if you have Visual Studio Code installed on your computer to work with the files easily. 
+2. Have either the [AWS Powershell](https://docs.aws.amazon.com/powershell/latest/userguide/pstools-getting-set-up-windows.html) installed on your computer OR use the [AWS Cloud Shell](https://aws.amazon.com/cloudshell/).
+3. **Preferred** for you to have AWS PowerShell installed on your computer.
+4. **Preferred** if you have Visual Studio Code installed on your computer to work with the files/commands easily. 
 
 # Build and Test
 
 ## Step 1
-Lets login to our AWS accounts whether that is your personal or via A Cloud Guru sandbox.
+Lets login to our AWS accounts whether that is your personal or via A Cloud Guru sandbox. Make sure you get your IAM credentials as we are building via the commandline.
 
 ## Step 2
-Lets setup our AWS Cloud Shell or open a terminal if have AWS Powershell install or AWS CLI. 
+Lets setup our AWS Cloud Shell OR open a terminal if have AWS Powershell install. Here are some tips to help setup your credntials to be used in the terminal session:
+
+``` bash
+# setup aws credentials
+# https://docs.aws.amazon.com/powershell/latest/reference/index.html?page=Set-AWSCredential.html&tocid=Set-AWSCredential
+Set-AWSCredential -AccessKey abcd -SecretKey abcd -StoreAs myBuild2Credentials
+# now lets use those credentials
+Set-AWSCredential -ProfileName myBuild2Credentials
+# lets go ahead and set our default region as well
+# https://docs.aws.amazon.com/powershell/latest/reference/index.html?page=Set-DefaultAWSRegion.html&tocid=Set-DefaultAWSRegion
+Set-DefaultAWSRegion -Region us-east-1
+```
 
 ## Step 3
 Lets setup our app environment. We will be creating a key pair, VPC, subnet, internet gateway, route table, security group, and our EC2 instance.
-Here you have two options, you can build via [AWS CLI](build.bash) or [AWS PowerShell](build2.ps1). For this demostration I will walk you through using AWS PowerShell.
+Here is build helper cheetsheet, [AWS PowerShell](build2.ps1). For this demostration I will walk you through using AWS PowerShell.
 
 ## Step 4
 If everything was setup correctly, we should be able to SSH into our ec2 so we can setup/install our web app on the ec2. NOTE, depening on how you setup you SSH key, you need to correct some of its permissions, ie. disable inheritance, make sure you are owner and have full control to the .pem you created. 
