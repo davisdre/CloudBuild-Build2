@@ -4,14 +4,25 @@ In this build we will be utilizing AWS to run a WordPress application. You could
 # Getting Started
 The following will help you get started with this build:
 1. Have either a [AWS free account](https://aws.amazon.com/free/free-tier/) OR A Cloud Guru account.
-2. Have either the [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html) installed on your computer OR use the [AWS Cloud Shell](https://aws.amazon.com/cloudshell/).
-3. Preferred for you to have either AWS CLI or AWS PowerShell installed on your computer.
-4. Preferred if you have Visual Studio Code installed on your computer to work with the files easily. 
+2. Have either the [AWS Powershell](https://docs.aws.amazon.com/powershell/latest/userguide/pstools-getting-set-up-windows.html) installed on your computer OR use the [AWS Cloud Shell](https://aws.amazon.com/cloudshell/).
+3. **Preferred** for you to have AWS PowerShell installed on your computer.
+4. **Preferred** if you have Visual Studio Code installed on your computer to work with the files easily. 
 
 # Build and Test
 
 ## Step 1
-Lets login to our AWS accounts whether that is your personal or via A Cloud Guru sandbox.
+Lets login to our AWS accounts whether that is your personal or via A Cloud Guru sandbox. Make sure you get your IAM credentials as we are building via the commandline.
+
+``` bash
+# setup aws credentials
+# https://docs.aws.amazon.com/powershell/latest/reference/index.html?page=Set-AWSCredential.html&tocid=Set-AWSCredential
+Set-AWSCredential -AccessKey abcd -SecretKey abcd -StoreAs myBuild2Credentials
+# now lets use those credentials
+Set-AWSCredential -ProfileName myBuild2Credentials
+# lets go ahead and set our default region as well
+# https://docs.aws.amazon.com/powershell/latest/reference/index.html?page=Set-DefaultAWSRegion.html&tocid=Set-DefaultAWSRegion
+Set-DefaultAWSRegion -Region us-east-1
+```
 
 ## Step 2
 Lets setup our AWS Cloud Shell or open a terminal if have AWS Powershell install or AWS CLI. 
