@@ -1,7 +1,7 @@
 # Create key pair and store in a variable
 # https://docs.aws.amazon.com/powershell/latest/userguide/pstools-ec2-keypairs.html
 $tagEC2KeyPair1 = New-Object Amazon.EC2.Model.Tag; $tagEC2KeyPair1.Key = "Application-Name"; $tagEC2KeyPair1.Value = "myBuild2"
-$tagEC2KeyPair2 = New-Object Amazon.EC2.Model.Tag; $tagEC2KeyPair2.Key = "Resource-Owner"; $tagEC2KeyPair2.Value = "davisdre@hotmail.com"
+$tagEC2KeyPair2 = New-Object Amazon.EC2.Model.Tag; $tagEC2KeyPair2.Key = "Resource-Owner"; $tagEC2KeyPair2.Value = "dfuou"
 $tagSpecEC2KeyPair = New-Object Amazon.EC2.Model.TagSpecification; $tagSpecEC2KeyPair.ResourceType = "key-pair"; $tagSpecEC2KeyPair.Tags.Add($tagEC2KeyPair1); $tagSpecEC2KeyPair.Tags.Add($tagEC2KeyPair2)
 $myBuild2KeyPair = New-EC2KeyPair -KeyName myBuild2KeyPair
 # Store the private key to a file
@@ -19,7 +19,7 @@ New-EC2Vpc -CidrBlock 10.0.0.0/16 -TagSpecification $tagSpecEC2Vpc
 $tagEC2Subnet1 = New-Object Amazon.EC2.Model.Tag; $tagEC2Subnet1.Key = "Application-Name"; $tagEC2Subnet1.Value = "myBuild2"
 $tagEC2Subnet2 = New-Object Amazon.EC2.Model.Tag; $tagEC2Subnet2.Key = "Resource-Owner"; $tagEC2Subnet2.Value = "davisdre@hotmail.com"
 $tagSpecEC2Subnet = New-Object Amazon.EC2.Model.TagSpecification; $tagSpecEC2Subnet.ResourceType = "subnet"; $tagSpecEC2Subnet.Tags.Add($tagEC2Subnet1); $tagSpecEC2Subnet.Tags.Add($tagEC2Subnet2)
-New-EC2Subnet -VpcId vpc-07daa741a0c15d55f -CidrBlock 10.0.0.0/24 -TagSpecification $tagSpecEC2Subnet
+New-EC2Subnet -VpcId vpc-075e747662f4669e6 -CidrBlock 10.0.0.0/24 -TagSpecification $tagSpecEC2Subnet
 
 # Create a internet gateway
 # https://docs.aws.amazon.com/powershell/latest/reference/index.html?page=New-EC2InternetGateway.html&tocid=New-EC2InternetGateway
@@ -30,15 +30,15 @@ New-EC2InternetGateway -TagSpecification $tagSpecEC2InternetGateway
 
 # Attach internet gateway to VPC
 # https://docs.aws.amazon.com/powershell/latest/reference/index.html?page=Add-EC2InternetGateway.html&tocid=Add-EC2InternetGateway
-Add-EC2InternetGateway -InternetGatewayId igw-0d41d2b4f32686e0f -VpcId vpc-07daa741a0c15d55f
+Add-EC2InternetGateway -InternetGatewayId igw-0ba22a05297845cdf -VpcId vpc-075e747662f4669e6
 
 # Lets create a route to the internet gateway
 # https://docs.aws.amazon.com/powershell/latest/reference/index.html?page=New-EC2Route.html&tocid=New-EC2Route
-New-EC2Route -RouteTableId rtb-091b4f22ed61874d7 -DestinationCidrBlock 0.0.0.0/0 -GatewayId igw-0d41d2b4f32686e0f
+New-EC2Route -RouteTableId rtb-00e3c045899fcc27a -DestinationCidrBlock 0.0.0.0/0 -GatewayId igw-0ba22a05297845cdf
 
 # Assocate subnet to route table.
 # https://docs.aws.amazon.com/powershell/latest/reference/index.html?page=Register-EC2RouteTable.html&tocid=Register-EC2RouteTable
-Register-EC2RouteTable -RouteTableId rtb-091b4f22ed61874d7 -SubnetId subnet-00b7e73f0e20abe65
+Register-EC2RouteTable -RouteTableId rtb-00e3c045899fcc27a -SubnetId subnet-0ddde474ca900263b
 
 # Lets get our security group setup and add some inbound ports, 22 and 80.
 # https://docs.aws.amazon.com/powershell/latest/userguide/pstools-ec2-sg.html#new-ec2securitygroup-vpc
@@ -46,7 +46,7 @@ Register-EC2RouteTable -RouteTableId rtb-091b4f22ed61874d7 -SubnetId subnet-00b7
 $tagEC2SecurityGroup1 = New-Object Amazon.EC2.Model.Tag; $tagEC2SecurityGroup1.Key = "Application-Name"; $tagEC2SecurityGroup1.Value = "myBuild2"
 $tagEC2SecurityGroup2 = New-Object Amazon.EC2.Model.Tag; $tagEC2SecurityGroup2.Key = "Resource-Owner"; $tagEC2SecurityGroup2.Value = "davisdre@hotmail.com"
 $tagSpecEC2SecurityGroup = New-Object Amazon.EC2.Model.TagSpecification; $tagSpecEC2SecurityGroup.ResourceType = "security-group"; $tagSpecEC2SecurityGroup.Tags.Add($tagEC2SecurityGroup1); $tagSpecEC2SecurityGroup.Tags.Add($tagEC2SecurityGroup2)
-$groupid = New-EC2SecurityGroup -VpcId vpc-07daa741a0c15d55f -GroupName "myBuild2SecurityGroup" -GroupDescription "Security group for my build2" -TagSpecification $tagSpecEC2SecurityGroup
+$groupid = New-EC2SecurityGroup -VpcId vpc-075e747662f4669e6 -GroupName "myBuild2SecurityGroup" -GroupDescription "Security group for my build2" -TagSpecification $tagSpecEC2SecurityGroup
 # lets add our inbound rules for port 22 and 80.
 # https://docs.aws.amazon.com/powershell/latest/reference/index.html?page=Grant-EC2SecurityGroupIngress.html&tocid=Grant-EC2SecurityGroupIngress
 $ip1 = new-object Amazon.EC2.Model.IpPermission 
@@ -68,4 +68,4 @@ Grant-EC2SecurityGroupIngress -GroupId $groupid -IpPermissions @( $ip1, $ip2 )
 $tagEC2Instance1 = New-Object Amazon.EC2.Model.Tag; $tagEC2Instance1.Key = "Application-Name"; $tagEC2Instance1.Value = "myBuild2"
 $tagEC2Instance2 = New-Object Amazon.EC2.Model.Tag; $tagEC2Instance2.Key = "Resource-Owner"; $tagEC2Instance2.Value = "davisdre@hotmail.com"
 $tagSpecEC2Instance = New-Object Amazon.EC2.Model.TagSpecification; $tagSpecEC2Instance.ResourceType = "instance"; $tagSpecEC2Instance.Tags.Add($tagEC2Instance1); $tagSpecEC2Instance.Tags.Add($tagEC2Instance2)
-New-EC2Instance -ImageId ami-051dfed8f67f095f5 -InstanceType t2.micro -KeyName myBuild2KeyPair -SecurityGroupId sg-0468f3bc07f345258 -SubnetId subnet-00b7e73f0e20abe65 -AssociatePublicIp $true -TagSpecification $tagSpecEC2Instance
+New-EC2Instance -ImageId ami-05fa00d4c63e32376 -InstanceType t2.micro -KeyName myBuild2KeyPair -SecurityGroupId sg-01d94dd5464def267 -SubnetId subnet-0ddde474ca900263b -AssociatePublicIp $true -TagSpecification $tagSpecEC2Instance
