@@ -19,7 +19,7 @@ Lets setup our AWS Cloud Shell OR open a terminal if have AWS Powershell install
 ``` bash
 # setup aws credentials
 # https://docs.aws.amazon.com/powershell/latest/reference/index.html?page=Set-AWSCredential.html&tocid=Set-AWSCredential
-Set-AWSCredential -AccessKey abcd -SecretKey abcd -StoreAs myBuild2Credentials
+Set-AWSCredential -AccessKey <accesskeyhere> -SecretKey <secretkeyhere> -StoreAs myBuild2Credentials
 # now lets use those credentials
 Set-AWSCredential -ProfileName myBuild2Credentials
 # lets go ahead and set our default region as well
@@ -35,7 +35,7 @@ Here is build helper cheetsheet, [AWS PowerShell](build2.ps1). For this demostra
 If everything was setup correctly, we should be able to SSH into our ec2 so we can setup/install our web app on the ec2. NOTE, depening on how you setup you SSH key, you need to correct some of its permissions, ie. disable inheritance, make sure you are owner and have full control to the .pem you created. 
 
 ```
-ssh -i .\myBuild2KeyPair.pem ec2-user@3.15.240.214
+ssh -i .\myBuild2KeyPair.pem ec2-user@your-ip-here
 ```
 
 ## Step 5
@@ -54,7 +54,7 @@ sudo systemctl start httpd
 sudo systemctl enable httpd
 ```
 
-Lets test to see we are good with apache running. go to browser, use public ip and lets see if you are good. ie. http://123.456.789.0
+Lets test to see we are good with apache running. go to browser, use public ip and lets see if you are good. ie. http://your-ip-here/
 
 ![Capture4](/Capture4.PNG)
 
@@ -81,7 +81,7 @@ find /var/www -type f -exec sudo chmod 0664 {} \;
 echo "<?php phpinfo(); ?>" > /var/www/html/phpinfo.php
 ```
 
-Now go to web browser and see if you see http://123.456.789.0/phpinfo.php. If you see the new page, lets continue with our setup.
+Now go to web browser and see if you see http://your-ip-here/phpinfo.php. If you see the new page, lets continue with our setup.
 
 ``` bash
 # let remove phpinfo.php file
@@ -154,7 +154,7 @@ sudo systemctl status mariadb
 sudo systemctl status httpd
 ```
 
-Now go to your public ip in browser and complate wordpress setup. http://123.456.789.0
+Now go to your public ip in browser and complate wordpress setup. http://your-ip-here
 
 ![Capture1](/Capture1.PNG)
 
